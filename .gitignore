@@ -2,4 +2,5 @@
 .env
 venv/
 __pycache__/
-reports/test_report.html
+tests/reports/
+.idea/
