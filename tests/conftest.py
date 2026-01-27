@@ -6,7 +6,8 @@ import logging
 import time
 import colorlog
 
-
+from src.ai_client import GeminiClient
+from src.judge import AIJudge
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 
@@ -47,5 +48,18 @@ def time_tracker(create_logger):
     create_logger.info(f"Test completed in {elapsed_time:.4f} seconds.")  # Log the time taken
 
 
+@pytest.fixture(scope="session")
+def gemini_client():
+    # Setup: Initialize the client
+    client = GeminiClient()
+
+    yield client
 
 
+
+@pytest.fixture(scope="session")
+def llm_as_judge(gemini_client):
+    # Setup: Initialize the client
+    judge = AIJudge(gemini_client)
+
+    yield judge
