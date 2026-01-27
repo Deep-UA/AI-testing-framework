@@ -25,6 +25,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" >> $GITHUB_ENV  # Set the secret as an environment variable
 
     - name: Run tests with pytest
       run: |
